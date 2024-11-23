@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cartlist</title>
+    <link rel="stylesheet" href="/cartlist.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body>
+
+
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-th-href="@{/homepage/{username}(username=${username})}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-th-href="@{/cartlist/{username}(username=${username})}">View List</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <h1><span data-th-text="*{username}"></span>, this is the list of carts you have</h1>
+
+
+    <table class="table table-primary table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Cart Name</th>
+                <th>Number of items</th>
+                <th>Commands</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr data-th-each="cart : ${cartlist}">
+                <td><a data-th-href="@{/cart/{username}/{cartname}(username=${username}, cartname=${cart.key})}">
+                        <code data-th-text="${cart.key}"></code>
+                    </a>
+                </td>
+                <td><span data-th-text="${cart.value}"></span></td>
+                <td>
+                    <form data-th-action="@{/cartlist/{username}(username=${username})}" method="POST">
+                        <input type="hidden" name="cartName" data-th-value="${cart.key}">
+                        <button type="submit">delete</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <form data-th-action="@{/homepage/{username}(username=${username})}" method="POST">
+        <button type="submit" class="button">Save</button>
+    </form>
+
+
+
+</body>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+
+</html>

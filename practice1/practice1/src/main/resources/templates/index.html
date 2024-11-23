@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="/index.css">
+</head>
+<body>
+    <div>
+        <form action="/homepage" method="POST" class="form">
+            <p class="heading">Login</p>
+            <table>
+                <tr>
+                    <td>
+                        <input type="text" name="username" placeholder="username" class="input-field">
+                    </td>
+                </tr>
+                <tr>
+                    <td data-th-if = "${error == 1}">
+                        <span data-th-text="${errorMsg}" class = "error"></span>
+                    </td>
+                </tr>
+                <tr >
+                    <td>
+                        <button type="submit" class ="button" >Login</button>
+                    </td>
+                </tr>
+    
+            </table>
+        </form>
+    </div>
+</body>
+</html>
